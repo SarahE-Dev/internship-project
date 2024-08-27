@@ -31,3 +31,13 @@ body {
     text-wrap: balance;
   }
 }
+
+html, body {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
