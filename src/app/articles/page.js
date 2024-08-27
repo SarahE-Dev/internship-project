@@ -15,10 +15,12 @@ export default function page() {
         })
       }, [])
   return (
-    <div>
+    <div className='container mx-auto p-6'>
+        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {articles.map((article)=>(
             <Article key={article.id} article={article} />
         ))}
+        </div>
     </div>
   )
 }
