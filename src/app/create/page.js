@@ -1,12 +1,16 @@
 'use client'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation';
+import withAuth from '../components/auth/WithAuth';
 
-export default function page() {
+function page() {
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
     const [content, setContent] = useState('');
     const router = useRouter();
+    const [userId, setUserId] = useState('');
+    useEffect(() => {
+      localStorage.getItem('user') && setUserId(JSON.parse(localStorage.getItem('user')).id);
+    }, [])
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -15,11 +19,10 @@ export default function page() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({title, author, content})
+                body: JSON.stringify({title, content, authorId: userId})
             })
             if (response.ok) {
                 console.log('Article created successfully');
-                setAuthor('');
                 setTitle('');
                 setContent('');
                 router.push('/articles');
@@ -47,19 +50,6 @@ export default function page() {
         onChange={(e) => setTitle(e.target.value)}
       />
     </div>
-    <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Autho">
-        Author
-      </label>
-      <input
-        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600"
-        id="author"
-        type="text"
-        placeholder="Article Author"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-      />
-    </div>
     <div className="mb-6">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
         Content
@@ -85,3 +75,5 @@ export default function page() {
     </div>
   )
 }
+
+export default withAuth(page)

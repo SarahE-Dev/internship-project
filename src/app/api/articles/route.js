@@ -3,31 +3,38 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET(req) {
-  const articles = await prisma.article.findMany();
+  const articles = await prisma.article.findMany({
+    include: {
+      author: true
+    }
+  });
   return new Response(JSON.stringify(articles), {status: 200});
 }
 
 export async function POST(req){
-    const {title, author, content} = await req.json();
-    const article = await prisma.article.create({
+    const { title, authorId, content } = await req.json();
+    const newArticle = await prisma.article.create({
         data: {
             title,
-            author,
-            content
+            content,
+            author: {
+                connect: {
+                    id: authorId
+                }
+            }
         }
     })
-    return new Response(JSON.stringify(article), {status: 200});
+    return new Response(JSON.stringify(newArticle), {status: 200});
 }
 
 export async function PUT(req){
-    const {id, title, author, content} = await req.json();
+    const {id, title, content} = await req.json();
     const updatedArticle = await prisma.article.update({
         where: {
-            id: id
+            id: Number(id)
         },
         data: {
             title,
-            author,
             content
         }
         })

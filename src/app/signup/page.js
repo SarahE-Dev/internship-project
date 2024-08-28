@@ -1,5 +1,7 @@
 'use client'
 import {useState} from 'react'
+import { useAuth } from '../components/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function page() {
     const [name, setName] = useState('');
@@ -8,13 +10,14 @@ export default function page() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const {login} = useAuth();
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
 
-    // Validate input
     if (!name || !email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
       setIsSubmitting(false);
@@ -27,23 +30,23 @@ export default function page() {
       return;
     }
 
-    // Replace this URL with your actual signup endpoint
-    const response = await fetch('/api/users/signup', {
+    fetch('/api/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ name, email, password }),
-    });
-
-    if (response.ok) {
-      console.log('Signup successful');
-    } else {
-      const errorData = await response.json();
-      setError(errorData.message || 'Signup failed');
-    }
-
-    setIsSubmitting(false);
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        login(data)
+        setIsSubmitting(false)
+        router.push('/')
+      })
+    .catch((error) => {
+        setError(error.message);
+        setIsSubmitting(false);
+      });
   };
   return (
     <div className="max-w-md mx-auto p-4 bg-gray-800 text-white rounded-lg shadow-md mt-8">
@@ -78,7 +81,6 @@ export default function page() {
           required
           className="mt-1 block w-full px-4 py-2 border border-purple-500 rounded-lg bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:border-purple-600"
           placeholder="Enter your email"
-          pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
           title="Enter a valid email address"
         />
       </div>

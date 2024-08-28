@@ -1,7 +1,8 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-export default function page({params}) {
+import withAuth from "@/app/components/auth/WithAuth";
+function page({params}) {
     const [article, setArticle] = useState({})
     const {id} = params;
     const router = useRouter();
@@ -9,6 +10,7 @@ export default function page({params}) {
       fetch(`/api/articles/${id}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setArticle(data)
       })
     }, [])
@@ -49,11 +51,11 @@ export default function page({params}) {
       </div>
       <div className="flex items-center">
         <div className="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center text-lg font-semibold">
-          {getInitials(article.author)}
+          {getInitials(article.author.name)}
         </div>
         <div className="ml-4">
           <p className="text-gray-700 text-sm">
-            {article.author}
+            {article.author.name}
           </p>
         </div>
       </div>
@@ -74,3 +76,5 @@ export default function page({params}) {
     </div>
   )
 }
+
+export default withAuth(page)

@@ -2,7 +2,8 @@ import Link from "next/link";
 
 export default function Article({article}) {
     const {title, author, content} = article;
-    const initials = author.split(' ').map((word) => word[0]).join('');
+    console.log(article);
+    const initials = author?.name[0].toUpperCase();
   return (
     <Link href={`/article/${article.id}`} passHref>
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
@@ -14,7 +15,7 @@ export default function Article({article}) {
           </div>
           <div className="ml-4">
             <p className="text-gray-700 text-sm">
-              {author}
+              {author?.name}
             </p>
           </div>
         </div>

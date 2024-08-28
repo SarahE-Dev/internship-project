@@ -1,10 +1,12 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import {useState} from 'react'
+import { useAuth } from '../components/context/AuthContext';
 
 export default function page() {
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {login} = useAuth();
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter()
@@ -22,9 +24,7 @@ export default function page() {
     })
      .then((response) => response.json())
      .then((data) => {
-        console.log(data);
-        setIsSubmitting(false);
-        localStorage.setItem('user', JSON.stringify(data));
+        login(data)
         router.push('/')
         
       })

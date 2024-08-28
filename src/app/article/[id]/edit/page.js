@@ -1,11 +1,11 @@
 'use client'
 import {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation';
+import withAuth from '@/app/components/auth/WithAuth';
 
-export default function page({params}) {
+function page({params}) {
     const {id} = params;
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
     const [content, setContent] = useState('');
     const router = useRouter();
     useEffect(() => {
@@ -13,7 +13,6 @@ export default function page({params}) {
       .then((response) => response.json())
       .then((data) => {
         setTitle(data.title);
-        setAuthor(data.author);
         setContent(data.content);
       })
     }, [])
@@ -21,16 +20,15 @@ export default function page({params}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`/api/articles/${id}`, {
+            const response = await fetch(`/api/articles`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({title, author, content, id})
+                body: JSON.stringify({title,content, id})
             })
             if (response.ok) {
                 console.log('Article updated successfully');
-                setAuthor('');
                 setTitle('');
                 setContent('');
                 router.push('/articles');
@@ -56,17 +54,7 @@ export default function page({params}) {
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="author" className="block text-gray-700 font-medium mb-2">Author</label>
-          <input
-            id="author"
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600 text-purple-800"
-            required
-          />
-        </div>
+        
         <div className="mb-4">
           <label htmlFor="content" className="block text-gray-700 font-medium mb-2">Content</label>
           <textarea
@@ -88,3 +76,5 @@ export default function page({params}) {
     </div>
   )
 }
+
+export default withAuth(page)

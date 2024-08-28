@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import Article from '../components/Article';
+import withAuth from '../components/auth/WithAuth';
 
 
 
-export default function page() {
+function page() {
     const [articles, setArticles] = useState([]);
     useEffect(() => {
         fetch('/api/articles')  
         .then((response) => response.json())
         .then((data) => {
+            console.log(data);
           setArticles(data)
         })
       }, [])
@@ -24,3 +26,5 @@ export default function page() {
     </div>
   )
 }
+
+export default withAuth(page)
