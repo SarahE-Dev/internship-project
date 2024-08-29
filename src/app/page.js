@@ -1,5 +1,6 @@
 import CobeAuto from "./components/Cobe";
 
+
 export default function Home() {
 
 

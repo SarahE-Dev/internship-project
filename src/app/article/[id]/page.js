@@ -44,7 +44,7 @@ function page({params}) {
         router.push(`/article/${id}/edit`);
       };
   return (
-    <div className="container mx-auto p-6 ">
+    <div className="container mx-auto p-6 max-w-lg">
       
       <h1 className="text-3xl font-bold mb-6">{article.title}</h1>
       <div className="text-gray-700 mb-4">

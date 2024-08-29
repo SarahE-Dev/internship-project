@@ -34,8 +34,8 @@ function page() {
         }
     }
   return (
-    <div className='flex flex-col items-center justify-center h-screen p-4'>
-        <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
+    <div className='flex flex-col items-center justify-center h-screen p-4 mx-auto max-w-xl'>
+        <form onSubmit={handleSubmit} className="w-full bg-white p-8 rounded-lg shadow-lg">
     <h2 className="text-2xl font-bold text-center mb-6 text-black">New Article</h2>
     <div className="mb-4">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
