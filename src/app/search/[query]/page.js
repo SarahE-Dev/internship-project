@@ -39,7 +39,7 @@ const SearchPage = ({ params }) => {
     <div className="max-w-xl mx-auto mt-10 p-6 bg-gradient-to-r from-purple-800 to-blue-800 border  rounded-xl shadow-md relative mb-10 ">
       <h1 className='mb-4'>
       <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#c640ff] from-35% to-[#4089ff] bg-clip-text text-center text-xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-        Search results for "{query}"
+        Search results for &quot;{query}&quot;:
       </span>
       </h1>
       {loading && <p className="text-gray-500">Loading...</p>}
