@@ -34,10 +34,10 @@ body {
 
 html, body {
   overflow: -moz-scrollbars-none;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none;    /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;    
 }
 
 html::-webkit-scrollbar, body::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari, Opera */
+  display: none; 
 }

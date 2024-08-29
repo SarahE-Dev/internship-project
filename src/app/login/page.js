@@ -1,7 +1,8 @@
 'use client'
 import { useRouter } from 'next/navigation';
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useAuth } from '../components/context/AuthContext';
+import Link from 'next/link';
 
 export default function page() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,13 @@ export default function page() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter()
+  const {user} = useAuth();
+  useEffect(() => {
+    if(user){
+      router.push('/')
+    }
+  }, [user])
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -74,6 +82,14 @@ export default function page() {
           {isSubmitting ? 'Submitting...' : 'Login'}
         </button>
       </form>
+      <div className="mt-6 text-center">
+        <p className="text-gray-700">
+          Don't have an account?{' '}
+          <Link className="text-purple-600 hover:underline" href="/signup">
+            Sign up
+          </Link>
+        </p>
+      </div>
     </div>
   )
 }

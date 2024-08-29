@@ -1,10 +1,12 @@
+import CobeAuto from "./components/Cobe";
 
 export default function Home() {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex w-screen min-h-screen">
       
+      <CobeAuto/>
     </main>
   );
 }

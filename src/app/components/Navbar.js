@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useAuth } from './context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { AnimatedText } from './AnimatedText';
+
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,10 +25,10 @@ export default function Navbar() {
   
 
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-black p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-white">
-          MyApp
+        <Link href="/" >
+          <AnimatedText/>
         </Link>
 
         
@@ -42,7 +44,8 @@ export default function Navbar() {
                 Create Article
               </Link>
               <div>
-                <form onSubmit={handleSearchSubmit}>
+                <form  onSubmit={handleSearchSubmit}>
+                  
                 <input
                   type="text"
                   placeholder="Search for an article..."
@@ -52,7 +55,7 @@ export default function Navbar() {
                 />
                 </form>
               </div>
-              <span className="text-white">Logged in as {user?.name}</span>
+              <span className="text-white">Logged in as: {user?.name}</span>
               <button onClick={logout} className="border border-purple-500 text-purple-500 py-2 px-4 rounded hover:bg-purple-500 hover:text-white transition duration-300">
                 Logout
               </button>
@@ -68,7 +71,6 @@ export default function Navbar() {
             </>
           )}
         </div>
-
         
         <div className="xl:hidden flex items-center">
           <button onClick={toggleMenu} className="text-white focus:outline-none">
@@ -78,8 +80,8 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
-      <div className={`xl:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-gray-800 text-white p-4`}>
+      
+      <div className={`xl:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-black text-white p-4`}>
         <div className="flex flex-col space-y-4">
           
           {user ? (
@@ -99,7 +101,7 @@ export default function Navbar() {
                 onChange={(e) => setQuery(e.target.value)}
               />
               </form>
-              <span className="text-white">Logged in as {user?.name}</span>
+              <span className="text-white">Logged in as: {user?.name}</span>
               <button onClick={logout} className="border border-purple-500 text-purple-500 py-2 px-4 rounded hover:bg-purple-500 hover:text-white transition duration-300">
                 Logout
               </button>

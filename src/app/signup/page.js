@@ -1,7 +1,8 @@
 'use client'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useAuth } from '../components/context/AuthContext';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function page() {
     const [name, setName] = useState('');
@@ -10,8 +11,14 @@ export default function page() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const {login} = useAuth();
+  const {login, user} = useAuth();
   const router = useRouter()
+  useEffect(() => {
+    if(user){
+      router.push('/')
+    }
+  }, [user])
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +56,7 @@ export default function page() {
       });
   };
   return (
-    <div className="max-w-md mx-auto p-4 bg-gray-800 text-white rounded-lg shadow-md mt-8">
+    <div className="max-w-md mx-auto p-4 bg-gray-800 text-white rounded-lg shadow-md mt-8 mb-8">
     <h2 className="text-2xl font-bold mb-6 text-center">Signup</h2>
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && <div className="text-red-500 mb-4">{error}</div>}
@@ -124,6 +131,14 @@ export default function page() {
         {isSubmitting ? 'Submitting...' : 'Signup'}
       </button>
     </form>
+    <div className="mt-6 text-center">
+        <p className="text-gray-700">
+          Already have an account?{' '}
+          <Link href="/login" className="text-purple-600 hover:underline">
+            Login
+          </Link>
+        </p>
+      </div>
   </div>
   )
 }
