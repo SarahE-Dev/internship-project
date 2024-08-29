@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import withAuth from "@/app/components/auth/WithAuth";
-function page({params}) {
+function ArtPage({params}) {
     const [article, setArticle] = useState({})
     const {id} = params;
     const router = useRouter();
@@ -78,4 +78,4 @@ function page({params}) {
   )
 }
 
-export default withAuth(page)
+export default withAuth(ArtPageage)

@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation';
 import withAuth from '../components/auth/WithAuth';
 
-function page() {
+function CreatePage() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const router = useRouter();
@@ -76,4 +76,4 @@ function page() {
   )
 }
 
-export default withAuth(page)
+export default withAuth(CreatePage)

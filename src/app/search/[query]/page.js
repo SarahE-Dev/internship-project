@@ -4,7 +4,7 @@ import { useAuth } from '@/app/components/context/AuthContext';
 import withAuth from '@/app/components/auth/WithAuth';
 
 
-const page = ({ params }) => {
+const SearchPage = ({ params }) => {
   const { query } = params; 
   const { user } = useAuth(); 
   const [articles, setArticles] = useState([]);
@@ -58,5 +58,5 @@ const page = ({ params }) => {
   );
 };
 
-export default withAuth(page);
+export default withAuth(SearchPage);
 

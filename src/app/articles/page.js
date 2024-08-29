@@ -6,7 +6,7 @@ import withAuth from '../components/auth/WithAuth';
 
 
 
-function page() {
+function ArticlesPage() {
     const [articles, setArticles] = useState([]);
     useEffect(() => {
         fetch('/api/articles')  
@@ -27,4 +27,4 @@ function page() {
   )
 }
 
-export default withAuth(page)
+export default withAuth(ArticlesPage)

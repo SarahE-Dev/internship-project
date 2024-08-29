@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const withAuth = (WrappedComponent) => {
+const WithAuth = (WrappedComponent) => {
   return (props) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const router = useRouter();
@@ -20,4 +20,4 @@ const withAuth = (WrappedComponent) => {
   };
 };
 
-export default withAuth;
+export default WithAuth;

@@ -4,7 +4,7 @@ import { useAuth } from '../components/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-export default function page() {
+export default function SignupPage() {
     const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

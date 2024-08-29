@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react'
 import { useAuth } from '../components/context/AuthContext';
 import Link from 'next/link';
 
-export default function page() {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {login} = useAuth();
