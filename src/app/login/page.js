@@ -16,7 +16,7 @@ export default function LoginPage() {
     if(user){
       router.push('/')
     }
-  }, [user])
+  }, [user, router])
   
 
   const handleSubmit = async (e) => {
@@ -84,7 +84,7 @@ export default function LoginPage() {
       </form>
       <div className="mt-6 text-center">
         <p className="text-gray-700">
-          Don't have an account?{' '}
+          Don't have an account?
           <Link className="text-purple-600 hover:underline" href="/signup">
             Sign up
           </Link>
