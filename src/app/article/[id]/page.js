@@ -78,4 +78,4 @@ function ArtPage({params}) {
   )
 }
 
-export default withAuth(ArtPageage)
+export default withAuth(ArtPage)
