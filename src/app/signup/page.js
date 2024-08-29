@@ -17,7 +17,7 @@ export default function SignupPage() {
     if(user){
       router.push('/')
     }
-  }, [user])
+  }, [user, router])
   
 
   const handleSubmit = async (e) => {
