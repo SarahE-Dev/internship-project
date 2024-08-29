@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/app/components/context/AuthContext';
 import withAuth from '@/app/components/auth/WithAuth';

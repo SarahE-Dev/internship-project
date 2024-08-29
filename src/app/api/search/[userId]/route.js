@@ -13,18 +13,22 @@ export async function GET(request, {params}){
   try {
     const articles = await prisma.article.findMany({
       where: {
-        authorId: userId,
         AND: [
+          {
+            authorId: Number(userId), 
+          },
           {
             OR: [
               {
                 title: {
-                  contains: query
+                  contains: query,
+                  mode: 'insensitive',
                 },
               },
               {
                 content: {
-                  contains: query
+                  contains: query,
+                  mode: 'insensitive', 
                 },
               },
             ],
