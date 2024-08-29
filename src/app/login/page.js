@@ -83,7 +83,7 @@ export default function LoginPage() {
         </button>
       </form>
       <div className="mt-6 text-center">
-        <p className="text-gray-700">
+        <p className="text-gray-700 ">
           Don't have an account?
           <Link className="text-purple-600 hover:underline" href="/signup">
             Sign up
