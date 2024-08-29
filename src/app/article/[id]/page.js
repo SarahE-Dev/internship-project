@@ -13,7 +13,7 @@ function ArtPage({params}) {
         console.log(data);
         setArticle(data)
       })
-    }, [])
+    }, [id])
     
     if((Object.keys(article).length === 0)) {
         return (
