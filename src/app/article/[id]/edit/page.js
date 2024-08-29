@@ -15,7 +15,7 @@ function EditPage({params}) {
         setTitle(data.title);
         setContent(data.content);
       })
-    }, [])
+    }, [id])
     
     const handleSubmit = async (e) => {
         e.preventDefault();
