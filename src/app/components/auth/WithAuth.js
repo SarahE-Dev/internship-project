@@ -1,9 +1,11 @@
-import { useRouter } from 'next/navigation';
+'use client';
+
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const WithAuth = (WrappedComponent) => {
   return (props) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(null); 
     const router = useRouter();
 
     useEffect(() => {
@@ -12,12 +14,19 @@ const WithAuth = (WrappedComponent) => {
       if (user) {
         setIsAuthenticated(true);
       } else {
+        setIsAuthenticated(false);
         router.push('/login');
       }
     }, [router]);
+
+    if (isAuthenticated === null) {
+      
+      return null;
+    }
 
     return isAuthenticated ? <WrappedComponent {...props} /> : null;
   };
 };
 
 export default WithAuth;
+
