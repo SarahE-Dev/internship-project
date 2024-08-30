@@ -4,9 +4,7 @@ import { useEffect, useRef } from "react";
  
 export function Cobe() {
 const canvasRef = useRef();
-if(!window.WebGL2RenderingContext){
-    console.log('No WebGL');
-}
+
 useEffect(() => {
   let phi = 0;
   let width = 0;
