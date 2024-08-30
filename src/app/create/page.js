@@ -2,15 +2,14 @@
 import {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation';
 import withAuth from '../components/auth/WithAuth';
+import { useLayoutEffect } from 'react';
+import { useAuth } from '../components/context/AuthContext';
 
 function CreatePage() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const router = useRouter();
-    const [userId, setUserId] = useState('');
-    useEffect(() => {
-      localStorage.getItem('user') && setUserId(JSON.parse(localStorage.getItem('user')).id);
-    }, [])
+    const {user} = useAuth()
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -19,7 +18,7 @@ function CreatePage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({title, content, authorId: userId})
+                body: JSON.stringify({title, content, authorId: user.id})
             })
             if (response.ok) {
                 console.log('Article created successfully');
