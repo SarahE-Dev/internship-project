@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const userDecoded = jwtDecode(JSON.parse(storedUser));
-      console.log(userDecoded);
       if(userDecoded.exp * 1000 < Date.now()) {
         logout();
       } else {
