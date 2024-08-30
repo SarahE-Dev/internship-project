@@ -1,6 +1,7 @@
 'use client'
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
 
@@ -9,14 +10,20 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(storedUser);
+      const userDecoded = jwtDecode(storedUser);
+      if(userDecoded.exp * 1000 < Date.now()) {
+        logout();
+      } else {
+        setUser(storedUser);
+      }
     }
   }, []);
 
   const login = (userData) => {
-    setUser(userData);
+    const userD = jwtDecode(userData)
+    setUser(userD);
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
