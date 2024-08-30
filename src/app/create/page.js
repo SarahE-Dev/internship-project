@@ -36,7 +36,11 @@ function CreatePage() {
   return (
     <div className='flex flex-col items-center justify-center h-screen p-4 mx-auto max-w-xl'>
         <form onSubmit={handleSubmit} className="w-full bg-white p-8 rounded-lg shadow-lg">
-    <h2 className="text-2xl font-bold text-center mb-6 text-black">New Article</h2>
+    <h2 className="text-2xl font-bold text-center mb-6 text-black">
+    <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#306ad7] via-purple-500 from-35% to-[#530c9b] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+        New Article
+      </span>
+      </h2>
     <div className="mb-4">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
         Title
