@@ -1,13 +1,7 @@
 import prisma from "@/app/lib/prisma";
 
-export async function GET(req) {
-  const articles = await prisma.article.findMany({
-    include: {
-      author: true
-    }
-  });
-  return new Response(JSON.stringify(articles), {status: 200});
-}
+
+
 
 export async function POST(req){
     const { title, authorId, content } = await req.json();
