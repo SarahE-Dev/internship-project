@@ -2,7 +2,6 @@
 import {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation';
 import withAuth from '../components/auth/WithAuth';
-import { useLayoutEffect } from 'react';
 import { useAuth } from '../components/context/AuthContext';
 
 function CreatePage() {

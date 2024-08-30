@@ -12,11 +12,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      const userDecoded = jwtDecode(storedUser);
+      const userDecoded = jwtDecode(JSON.parse(storedUser));
+      console.log(userDecoded);
       if(userDecoded.exp * 1000 < Date.now()) {
         logout();
       } else {
-        setUser(storedUser);
+        setUser(userDecoded);
       }
     }
   }, []);

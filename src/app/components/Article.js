@@ -2,7 +2,6 @@ import Link from "next/link";
 
 export default function Article({article}) {
     const {title, author, content} = article;
-    console.log(article);
     const initials = author?.name[0].toUpperCase();
   return (
     <Link href={`/article/${article.id}`} passHref>
