@@ -4,6 +4,9 @@ import { useEffect, useRef } from "react";
  
 export function Cobe() {
 const canvasRef = useRef();
+if(!window.WebGL2RenderingContext){
+    console.log('No WebGL');
+}
 useEffect(() => {
   let phi = 0;
   let width = 0;
@@ -17,8 +20,8 @@ useEffect(() => {
     phi: 0,
     theta: 0.3,
     dark: 1,
-    diffuse: 3,
-    mapSamples: 16000,
+    diffuse: window.innerWidth < 768 ? 2 : 3,
+    mapSamples: window.innerWidth < 768 ? 8000 : 16000,
     mapBrightness: 1.2,
     baseColor: [1, 1, 1],
     markerColor: [251 / 255, 100 / 255, 21 / 255],
